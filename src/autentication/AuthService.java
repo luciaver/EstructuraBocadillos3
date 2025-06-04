@@ -7,8 +7,15 @@ import utils.Validaciones;
 import java.time.LocalDate;
 import java.util.Scanner;
 
+/**
+ *
+ */
 public class AuthService {
 
+    /**
+     *
+     * @return
+     */
     public static Usuario login() {
         Scanner entrada= new Scanner(System.in);
         String usuario,password;
@@ -47,35 +54,39 @@ public class AuthService {
         String[] alergias;
         String fecha_nacimiento;
 
-
+        //Validacion del nombre de usuario
 
         do {
             System.out.print("Ingrese su usuario : ");
              usuario = scanner.nextLine();
         }while (!Validaciones.validarUsuario(usuario));
 
+        //validacion del nombre
         do {
             System.out.print("Ingrese su nombre: ");
             nombre = scanner.nextLine();
         }while (!Validaciones.validarNombre(nombre));
 
+        //Validacion apellidos
         do{
             System.out.print("Ingrese sus apellidos: ");
             apellidos = scanner.nextLine();
         } while (!Validaciones.validarApellido(apellidos));
 
+        //Validacion correo
         do {
             System.out.print("Ingrese su correo: ");
             correo = scanner.nextLine();
 
         }while (!Validaciones.comprobarEmail(correo));
 
+        //Validar reestablecer contraseña
         do {
             System.out.print("Contraseña: ");
             password = scanner.nextLine();
 
         }while (!Validaciones.validarContrasenya(password));
-
+        //Validar edad
         do {
             System.out.println("Introduce tu fecha de nacimiento (AA-MM-DD): ");
             fecha_nacimiento= scanner.nextLine();

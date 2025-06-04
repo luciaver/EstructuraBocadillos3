@@ -2,12 +2,9 @@ package data;
 
 import models.*;
 import servicios.BocadilloServicio;
+import servicios.IncidenciaServicios;
 import servicios.PedidoServicio;
 import servicios.UsuarioServicios;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Gesdata {
@@ -15,10 +12,12 @@ public class Gesdata {
     public static ArrayList<Bocadillo> listaBocadillos = new ArrayList<>();
     public static ArrayList<Pedido> listaPedidos = new ArrayList<>();
 
+
     public static void iniciarFicheros() {
         UsuarioServicios.volcarListas();
         BocadilloServicio.volcarBocadillos();
         PedidoServicio.volcarPedidos();
+        IncidenciaServicios.volcarIncidencias();
     }
 
 

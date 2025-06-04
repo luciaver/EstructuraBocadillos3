@@ -1,12 +1,11 @@
 package models;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Bocadillo implements Serializable {
     static Scanner teclado = new Scanner(System.in);
-
+//Variables
     private int id;
     private String nombre;
     private String descrip;
@@ -15,9 +14,9 @@ public class Bocadillo implements Serializable {
     private String[] alergenos;
     private double precio;
     private boolean caliente;
-    private LocalDate fecha;
-
-    public Bocadillo(int id, String nombre, String descrip, String ciudadPopular, LocalDate fecha, String[] ingredientes, String[] alergenos, double precio, boolean caliente) {
+    private Calendario fecha;
+//Constructor
+    public Bocadillo(int id, String nombre, String descrip, String ciudadPopular, Calendario fecha, String[] ingredientes, String[] alergenos, double precio, boolean caliente) {
         this.id = id;
         this.nombre = nombre;
         this.descrip = descrip;
@@ -47,6 +46,8 @@ public class Bocadillo implements Serializable {
         return "";
 
     }
+
+    //Getters y Setters
 
     public static Bocadillo[] agregarBocadillo(Bocadillo[] lista, Bocadillo bocadillo) {
         return null;
@@ -121,17 +122,19 @@ public class Bocadillo implements Serializable {
         return false;
     }
 
-    public LocalDate getFecha() {
+    public Calendario getCalendario() {
         return fecha;
     }
 
-    public void setFecha(LocalDate fecha) {
+    public void setFecha(Calendario fecha) {
         this.fecha = fecha;
     }
 
     public String mostrarCuriosidades() {
         return "ID: " + id + "\nNombre: " + nombre + "\nDescripción: " + descrip + "\nCiudad Popular: " + ciudadPopular + "\nPrecio: " + precio + "€\nTipo: " + (caliente ? "Caliente" : "Frío");
     }
+
+    //Mostrar info de bocadillo
 
     public void mostrarInfoBocadillo(){
         System.out.println("Id: " + id);

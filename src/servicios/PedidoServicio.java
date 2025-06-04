@@ -1,42 +1,59 @@
 package servicios;
 
-import models.Bocadillo;
-import models.Pedido;
-import models.Usuario;
+import models.*;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class PedidoServicio {
+    // Lista que almacenará los pedidos generados
     private static ArrayList<Pedido> listaPedidos = new ArrayList<>();
+    // Lista de usuarios obtenida desde el servicio de usuarios
     private static ArrayList<Usuario> listaUsuarios = UsuarioServicios.obtenerUsuario();
+    private static ArrayList<Alumno> listaAlumnos = new ArrayList<>();
+    // Lista de bocadillos obtenida desde el servicio de bocadillos
     private static ArrayList<Bocadillo> listaBocadillos = BocadilloServicio.obtenerBocadillos();
 
 
+/**
+ * Método para volcar (guardar) pedidos en un archivo binario.
+ * Se generan aleatoriamente 5 pedidos con estado "pendiente",
+ * */
+
+
+
     public static void volcarPedidos() {
-        Random rand = new Random();
+        for (Usuario u : listaUsuarios) {
+            if (u instanceof Alumno) {
+                listaAlumnos.add((Alumno) u);
+            }
+        }
+
+        Random rand = new Random();// Generador de números aleatorios
+        // Genera 5 pedidos con datos aleatorios
         for (int i = 1; i <= 5; i++) {
             listaPedidos.add(new Pedido(
                     i,
                     "pendiente",
-                    listaUsuarios.get(rand.nextInt(0, listaUsuarios.size() - 1)),
+                    listaAlumnos.get(rand.nextInt(0, listaAlumnos.size() - 1)),
                     listaBocadillos.get(rand.nextInt(0, listaBocadillos.size() - 1)),
-                    null
+                    new Calendario(i + 4, LocalDate.now())
             ));
-            System.out.println("pedido " + i + " creado");
         }
 
         try {
             FileOutputStream fos = new FileOutputStream("src/persistencia/Pedido.dat");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
 
+            // Escribe cada pedido de la lista en el archivo
             for (Pedido p : listaPedidos) {
-                System.out.println(p.getBocadillo().getNombre());
                 oos.writeObject(p);
             }
 
+            // Cierra los flujos de salida
             fos.close();
             oos.flush();
             oos.close();
@@ -45,13 +62,23 @@ public class PedidoServicio {
             e.getMessage();
 
         } catch (FileNotFoundException e) {
+            // No se encontró el archivo
 
         } catch (IOException e) {
         }
 
     }
 
-    public static List<Pedido> obtenerPedidos() {
+    /**
+     * Método para leer los pedidos almacenados en el archivo binario
+     * y devolverlos en una lista.
+     *
+     * @return lista de pedidos cargados desde el archivo
+     */
+
+
+    public static ArrayList<Pedido> obtenerPedidos() {
+        listaPedidos.clear();
         try {
             FileInputStream fis = new FileInputStream("src/persistencia/Pedido.dat");
             ObjectInputStream ois = new ObjectInputStream(fis);

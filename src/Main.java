@@ -1,19 +1,28 @@
 import autentication.MenuAutenticar;
 import data.Gesdata;
 import models.*;
-import servicios.BocadilloServicio;
+import servicios.IncidenciaServicios;
 import servicios.PedidoServicio;
-import servicios.UsuarioServicios;
 import ui.MenuAdministrador;
 import ui.MenuAlumno;
 import ui.MenuCocina;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
-        //Gesdata.iniciarFicheros();
+        Gesdata.iniciarFicheros();
 
+        ArrayList<Pedido> listaPedidos = PedidoServicio.obtenerPedidos();
+        ArrayList<Incidencia> listaIncidencias = IncidenciaServicios.obtenerIncidencias();
+
+        for (Pedido p : listaPedidos) {
+            System.out.println(p.getId_pedido());
+        }
+
+        for (Incidencia i : listaIncidencias) {
+            System.out.println(i.getDescripcion());
+        }
 
         Usuario activo;
 
@@ -35,4 +44,5 @@ public class Main {
         }
     }
 }
+
 

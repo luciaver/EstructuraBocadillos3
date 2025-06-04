@@ -11,6 +11,7 @@ public class Validaciones {
     static Scanner teclado = new Scanner(System.in);
     static int intentosLogin = 0;
 
+    //Validacion del login
     public static void login() {
         if (usuarioRegistrado == null) {
             System.out.println("Error, no hay usuarios registrados");
@@ -30,6 +31,7 @@ public class Validaciones {
         System.out.print("Introduce la contraseña : ");
         String contrasenya = teclado.nextLine();
 
+        //Comprobacion del registro
         if (usuario.equals(usuarioRegistrado) && contrasenya.equals(contrasenyaRegistrada)) {
             System.out.println("Inicio de sesión correcto " + usuario + "!");
 
@@ -38,8 +40,7 @@ public class Validaciones {
             intentosLogin++;
         }
     }
-
-
+    // Verifica que se ingrese la misma contraseña dos veces
     public static boolean verificarContrasenya(String contrasenya) {
         System.out.print("Introduce de nuevo la contraseña para verificarla: ");
         String contrasenya2 = teclado.nextLine();
@@ -52,7 +53,7 @@ public class Validaciones {
         return true;
     }
 
-
+        //Validar registro,junto con las validaciones del nombre y apellidos
     public static void registro() {
         if (usuarioRegistrado != null) {
             System.out.println("Error, ya hay un usuario registrado");
@@ -60,7 +61,7 @@ public class Validaciones {
             System.out.print("Introduce el nombre (Solo nombre, letras o caracteres especiales no válidos): ");
             teclado.nextLine();
             String nombre = teclado.nextLine();
-            validarNombre(nombre);
+            validarNombre(nombre); //Te lleva a las validaciones del nombre
 
             System.out.print("Introduce el apellido (Solo nombre, letras o caracteres especiales no válidos):");
             String apellido = teclado.nextLine();
@@ -83,7 +84,7 @@ public class Validaciones {
             // validarEdad(dia, mes, anyo);
 
             System.out.print("Introduce el nombre de usuario(Puede contener letras, números y carácteres especiales): ");
-            teclado.nextLine();//limpia buffer
+            teclado.nextLine();
             usuarioRegistrado = teclado.nextLine();
             validarUsuario(usuarioRegistrado);
 
@@ -308,6 +309,7 @@ public class Validaciones {
     }
 
 
+    // Validación básica del email (solo acepta @gmail.com)
     public static boolean comprobarEmail(String email) {
         int index = email.indexOf("@"); //Almacena la primera posición del @
         if (index < 0) {//Si no hay @ devuelve falso y error
@@ -329,7 +331,7 @@ public class Validaciones {
         return igual;
     }
 
-
+// Captcha simple
     public static void captcha() {
         int random1 = (int) (Math.random() * 100 + 1);
         int random2 = (int) (Math.random() * 100 + 1);

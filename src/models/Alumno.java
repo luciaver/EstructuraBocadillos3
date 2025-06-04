@@ -3,6 +3,9 @@ package models;
 import java.time.LocalDate;
 
 public class Alumno extends Usuario {
+
+    //Variables y getters y setters
+
     private String [] alergias;
     private String curso;
     private String num_expediente;

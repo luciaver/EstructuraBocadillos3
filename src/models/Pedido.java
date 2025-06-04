@@ -3,19 +3,21 @@ package models;
 import java.io.Serializable;
 import java.util.Scanner;
 
+//Variables
 public class Pedido implements Serializable {
     static Scanner teclado = new Scanner(System.in);
-    private static int id_pedido;
-    private static Usuario usuario;
-    private static Bocadillo bocadillo;
-    private static Calendario fecha;
-    private static String estado;
-    private static Usuario[] listaUsuarios;
-    private static Bocadillo[] listaBocadillos;
+    private int id_pedido;
+    private Usuario usuario;
+    private Bocadillo bocadillo;
+    private Calendario fecha;
+    private String estado;
+    private Usuario[] listaUsuarios;
+    private Bocadillo[] listaBocadillos;
 
     public Pedido() {
     }
 
+    //Constructores
     public Pedido(int id_pedido, String estado, Usuario usuario, Bocadillo bocadillo, Calendario fecha) {
         this.id_pedido = id_pedido;
         this.estado = estado;
@@ -28,6 +30,7 @@ public class Pedido implements Serializable {
     public static void seleccionarBocadillo() {
 
     }
+    //Getters y Setters
 
     public boolean tieneAlergia(Bocadillo bocata, Usuario usuario) {
         return false;
@@ -51,20 +54,36 @@ public class Pedido implements Serializable {
         this.id_pedido = id_pedido;
     }
 
-    public static Usuario getUsuario() {
+    public Usuario getUsuario() {
         return usuario;
     }
 
-    public static void setUsuario(Usuario usuario) {
-        Pedido.usuario = usuario;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
-    public static Bocadillo getBocadillo() {
+    public Bocadillo getBocadillo() {
         return bocadillo;
     }
 
-    public static void setBocadillo(Bocadillo bocadillo) {
-        Pedido.bocadillo = bocadillo;
+    public void setBocadillo(Bocadillo bocadillo) {
+        this.bocadillo = bocadillo;
+    }
+
+    public Usuario[] getListaUsuarios() {
+        return listaUsuarios;
+    }
+
+    public void setListaUsuarios(Usuario[] listaUsuarios) {
+        this.listaUsuarios = listaUsuarios;
+    }
+
+    public Bocadillo[] getListaBocadillos() {
+        return listaBocadillos;
+    }
+
+    public void setListaBocadillos(Bocadillo[] listaBocadillos) {
+        this.listaBocadillos = listaBocadillos;
     }
 
     public Calendario getFecha() {

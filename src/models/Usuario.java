@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+//Variables
 public class Usuario  implements Serializable {
     private String usuario;
     private String nombre;
@@ -16,7 +17,7 @@ public class Usuario  implements Serializable {
     private List<String> incidencias = new ArrayList<>();
 
     public Usuario() {}
-
+//Constructor
     public Usuario(String usuario, String nombre, String apellidos, String correo, String password, String curso, LocalDate fecha_nacimiento) {
         this.usuario = usuario;
         this.nombre = nombre;
@@ -27,6 +28,7 @@ public class Usuario  implements Serializable {
         this.fecha_nacimiento = fecha_nacimiento;
     }
 
+    //Getters y Setters
 
     public String getUsuario() {
         return usuario;
@@ -84,6 +86,7 @@ public class Usuario  implements Serializable {
         this.incidencias.add(incidencia);
     }
 
+    //Mostrar informacion de usuario
     public void mostrarInfoUsuario() {
         System.out.println("Usuario: " + usuario);
         System.out.println("Nombre: " + nombre);

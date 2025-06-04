@@ -13,6 +13,7 @@ import java.util.Scanner;
 
 public class MenuAutenticar {
 
+    //Menu principal
     public static Usuario menAuth() {
         Usuario usuarioActivo = null;
         ArrayList<Usuario> listaUsuarios = UsuarioServicios.obtenerUsuario();

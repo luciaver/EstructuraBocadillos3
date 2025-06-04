@@ -9,9 +9,15 @@ import java.util.List;
 import java.util.Scanner;
 
 public class UsuarioServicios {
+    // Lista que almacena los usuarios registrados en memoria
     private static List<Usuario> listaUsuarios = new ArrayList<>();
 
     private static Scanner scanner = new Scanner(System.in);
+    /**
+     * Busca un usuario por su nombre de usuario.
+     * @param usuario nombre de usuario a buscar
+     * @return el objeto Usuario si se encuentra, o null si no
+     */
 
     public static Usuario buscarUsuario(String usuario) {
         for (Usuario itemUsuario : listaUsuarios)
@@ -39,6 +45,11 @@ public class UsuarioServicios {
 
     }
 
+    /**
+     * Modifica los datos de un usuario existente según el objeto `modificado`.
+     * @param modificado Usuario con los datos actualizados.
+     */
+
     public static void modificarUsuario(Usuario modificado) {
         Usuario usu = buscarUsuario(modificado.getUsuario());
         if (usu != null) {
@@ -53,7 +64,10 @@ public class UsuarioServicios {
         }
 
     }
-
+    /**
+     * Elimina un usuario por su nombre de usuario.
+     * @param eliminar nombre de usuario a eliminar
+     */
     public static void eliminarUsuario(String eliminar) {
         Usuario encontrado = null;
         for (Usuario itemUsuario : listaUsuarios) {
@@ -70,14 +84,25 @@ public class UsuarioServicios {
         }
     }
 
-
+    /**
+     * Vuelca usuarios predeterminados y los de la lista en un archivo.
+     * Incluye un alumno, un cocina y un administrador por defecto.
+     */
     public static void volcarListas() {
         try {
             FileOutputStream fos = new FileOutputStream("src/persistencia/Usuarios.dat", true);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(new Alumno("lolo", "lolo", "lol", "lolo@gmail.com", "123456", LocalDate.now(), null, "1ºESO", "A"));
+            oos.writeObject(new Alumno("lolo", "lolo", "lol", "lolo@gmail.com", "123456", LocalDate.now(), null, "1ºESO", "A"));
+            oos.writeObject(new Alumno("maria", "gomez", "mari", "maria@gmail.com", "abcdef", LocalDate.now(), null, "1ºESO", "B"));
+            oos.writeObject(new Alumno("juan", "perez", "juampi", "juanp@gmail.com", "654321", LocalDate.now(), null, "2ºESO", "A"));
+            oos.writeObject(new Alumno("ana", "lopez", "anita", "ana.lopez@gmail.com", "qwerty", LocalDate.now(), null, "3ºESO", "C"));
+            oos.writeObject(new Alumno("carlos", "ruiz", "charly", "carlosr@gmail.com", "zxcvb", LocalDate.now(), null, "4ºESO", "B"));
+            oos.writeObject(new Alumno("lucia", "navarro", "luci", "lucia.n@gmail.com", "112233", LocalDate.now(), null, "1ºESO", "A"));
+
             oos.writeObject(new Cocina("cocina1", "Pepa", "pep", "pepa@gmail.com", "123456", LocalDate.now()));
             oos.writeObject(new Administrador("admin", "Admin", "vera", "admin@gmail.com", "123456", LocalDate.now()));
+            // También se vuelcan los usuarios actuales en listaUsuarios
             for (Usuario u : listaUsuarios) {
                 oos.writeObject(u);
             }

@@ -2,10 +2,8 @@ package ui;
 import models.Bocadillo;
 import servicios.BocadilloServicio;
 
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class MenuAlumno {
@@ -25,6 +23,7 @@ public class MenuAlumno {
             }
         }
 
+        //Menu principal alumno
         do {
 
             System.out.println("====================================");
@@ -38,6 +37,9 @@ public class MenuAlumno {
             seleccionAlumno = scanner.nextLine();
 
             switch (seleccionAlumno) {
+
+                //Solicitar bocadillo
+
                 case "1":
 
 
@@ -45,7 +47,7 @@ public class MenuAlumno {
                     System.out.println("Frios: ");
 
                     for (Bocadillo b : listaFrios) {
-                        if (b.getFecha().isEqual(LocalDate.now())) {
+                        if (LocalDate.now().isEqual(b.getCalendario().getFecha())) {
                             System.out.println(cont + "." + b.getNombre() + " - " + b.getPrecio() + "€");
                             cont++;
                         }
@@ -54,7 +56,7 @@ public class MenuAlumno {
                     System.out.println("Calientes: ");
 
                     for (Bocadillo b : listaCaliente) {
-                        if (b.getFecha().isEqual(LocalDate.now())) {
+                        if (LocalDate.now().isEqual(b.getCalendario().getFecha())) {
                             System.out.println(cont + "." + b.getNombre() + " - " + b.getPrecio() + "€");
                             cont++;
                         }
@@ -63,15 +65,21 @@ public class MenuAlumno {
                     break;
 
                 case "2":
+                    //Horario
+
                     System.out.println("Horario para pedir : 9:00-12:00");
 
                     break;
 
                 case "3":
+                    //Historial de pedidos
+
 
                     break;
 
                 case "4":
+                    //Salir
+
                     System.out.println("Saliendo del menú de alumno...");
                     break;
 

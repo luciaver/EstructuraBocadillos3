@@ -3,6 +3,7 @@ package models;
 import java.time.LocalDate;
 import java.util.Scanner;
 
+//Variables y getters and setters
 public class Administrador extends Usuario {
     private int nivel;
     private static Scanner scanner = new Scanner(System.in);

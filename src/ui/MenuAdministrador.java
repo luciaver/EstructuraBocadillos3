@@ -95,7 +95,6 @@ public class MenuAdministrador {
                     break;
                 case "3":
                     System.out.println("Entrando en gestión de pedidos...");
-                    PedidoServicio.
                     break;
                 case "4":
                     System.out.println("Saliendo del menú de administrador...");
