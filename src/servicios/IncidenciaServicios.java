@@ -1,49 +1,42 @@
 package servicios;
 
+import data.Gesdata;
 import models.*;
 
 import java.io.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class IncidenciaServicios {
     private static ArrayList<Incidencia> listaIncidencias = new ArrayList<>();
-    private static ArrayList<Pedido> listaPedidos = PedidoServicio.obtenerPedidos();
-    private static ArrayList<Usuario> listaUsuarios = UsuarioServicios.obtenerUsuario();
 
-    public static void crearIncidencia(String desripcion, Pedido pedido){
-        //todo -> crear menú incidencias
+    public static void crearIncidencia(Usuario usuario){
+        Scanner sc = new Scanner(System.in);
         Incidencia incidencia = new Incidencia();
 
-        incidencia.setDescripcion(desripcion);
+        System.out.println("Introduzca la descripción de la incidencia: ");
+        String descripcion = sc.nextLine();
+        incidencia.setDescripcion(descripcion);
+
+        incidencia.setUsuario(usuario);
 
         incidencia.setFechaHora(LocalDateTime.now());
 
-        incidencia.setPedido(pedido);
-    }
+        listaIncidencias.add(incidencia);
+        volcarIncidencias();
 
-    public static void eliminarIncidencia(Incidencia incidencia) {
-        listaIncidencias.remove(incidencia);
-    }
-
-    public static void resolverIncidencia(Incidencia incidencia) {
-        incidencia.setResuelta(true);
-    }
-
-    public static void editarDescIncidencia(Incidencia incidencia) {
-        //sout de poner descripción con scanner:)
-        incidencia.setDescripcion("ola jajant");
+        System.out.println("Incidencia creada con exito!");
     }
 
     public static void volcarIncidencias() {
-        ArrayList<Pedido> listaPedidos = PedidoServicio.obtenerPedidos();
+        ArrayList<Usuario> listaUsuarios = Gesdata.listaUsuarios;
         try {
             FileOutputStream fos = new FileOutputStream("src/persistencia/Incidencia.dat", true);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(new Incidencia(0, "incidencia 1", LocalDateTime.now(), listaPedidos.get(0)));
-            oos.writeObject(new Incidencia(1, "incidencia 2", LocalDateTime.now(), listaPedidos.get(1)));
-            oos.writeObject(new Incidencia(2, "incidencia 3", LocalDateTime.now(), listaPedidos.get(2)));
+            listaIncidencias.add(new Incidencia(0, "incidencia 1", listaUsuarios.get(0)));
+            listaIncidencias.add(new Incidencia(1, "incidencia 2", listaUsuarios.get(1)));
+            listaIncidencias.add(new Incidencia(2, "incidencia 3", listaUsuarios.get(2)));
             // También se vuelcan los usuarios actuales en listaUsuarios
             for (Incidencia i : listaIncidencias) {
                 oos.writeObject(i);
@@ -63,6 +56,7 @@ public class IncidenciaServicios {
     }
 
     public static ArrayList<Incidencia> obtenerIncidencias() {
+        listaIncidencias.clear();
         try {
             FileInputStream fis = new FileInputStream("src/persistencia/Incidencia.dat");
             ObjectInputStream ois = new ObjectInputStream(fis);

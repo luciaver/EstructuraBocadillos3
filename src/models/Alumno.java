@@ -1,6 +1,7 @@
 package models;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Alumno extends Usuario {
 
@@ -11,6 +12,7 @@ public class Alumno extends Usuario {
     private String num_expediente;
     private String motivoBaja;
     private String fechaBaja;
+    private ArrayList<Pedido> listaPedidos;
 
     public Alumno(String usuario, String nombre, String apellidos,
                   String correo, String password, LocalDate fecha_nacimiento,
@@ -20,6 +22,7 @@ public class Alumno extends Usuario {
         this.alergias = alergias;
         this.curso = curso;
         this.num_expediente = num_expediente;
+        this.listaPedidos = new ArrayList<>();
     }
 
     public String[] getAlergias() {
@@ -43,9 +46,27 @@ public class Alumno extends Usuario {
         this.fechaBaja = fecha;
     }
 
+    public ArrayList<Pedido> getListaPedidos() {
+        return listaPedidos;
+    }
 
+    public void setListaPedidos(ArrayList<Pedido> listaPedidos) {
+        this.listaPedidos = listaPedidos;
+    }
 
+    public void setFechaBaja(String fechaBaja) {
+        this.fechaBaja = fechaBaja;
+    }
 
+    public void setMotivoBaja(String motivoBaja) {
+        this.motivoBaja = motivoBaja;
+    }
 
+    public void setNum_expediente(String num_expediente) {
+        this.num_expediente = num_expediente;
+    }
 
+    public void setCurso(String curso) {
+        this.curso = curso;
+    }
 }

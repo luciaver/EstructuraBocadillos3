@@ -11,13 +11,21 @@ public class Gesdata {
     public static ArrayList<Usuario> listaUsuarios = new ArrayList<>();
     public static ArrayList<Bocadillo> listaBocadillos = new ArrayList<>();
     public static ArrayList<Pedido> listaPedidos = new ArrayList<>();
+    public static ArrayList<Incidencia> listaIncidencias = new ArrayList<>();
 
 
     public static void iniciarFicheros() {
         UsuarioServicios.volcarListas();
+        listaUsuarios = UsuarioServicios.obtenerUsuario();
+
         BocadilloServicio.volcarBocadillos();
+        listaBocadillos = BocadilloServicio.obtenerBocadillos();
+
         PedidoServicio.volcarPedidos();
+        listaPedidos = PedidoServicio.obtenerPedidos();
+
         IncidenciaServicios.volcarIncidencias();
+        listaIncidencias = IncidenciaServicios.obtenerIncidencias();
     }
 
 

@@ -7,17 +7,17 @@ public class Incidencia implements Serializable {
     private int id;
     private String descripcion;
     private LocalDateTime fechaHora;
-    private Pedido pedido;
+    private Usuario usuario;
     private boolean resuelta;
 
     public Incidencia() {
     }
 
-    public Incidencia(int id, String descripcion, LocalDateTime fechaHora, Pedido pedido) {
+    public Incidencia(int id, String descripcion, Usuario usuario) {
         this.id = id;
         this.descripcion = descripcion;
-        this.fechaHora = fechaHora;
-        this.pedido = pedido;
+        this.fechaHora = LocalDateTime.now();
+        this.usuario = usuario;
         this.resuelta = false;
     }
 
@@ -45,12 +45,12 @@ public class Incidencia implements Serializable {
         this.fechaHora = fechaHora;
     }
 
-    public Pedido getPedido() {
-        return pedido;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setPedido(Pedido pedido) {
-        this.pedido = pedido;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public boolean isResuelta() {
@@ -64,6 +64,6 @@ public class Incidencia implements Serializable {
     @Override
     public String toString() {
         return "ID: " + id + ", Descripción: " + descripcion + ", FechaHora: " + fechaHora +
-                ", ID Pedido: " + pedido + ", Resuelta: " + resuelta;
+                ", ID Pedido: " + usuario + ", Resuelta: " + resuelta;
     }
 }

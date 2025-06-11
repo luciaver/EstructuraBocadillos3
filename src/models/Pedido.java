@@ -86,7 +86,7 @@ public class Pedido implements Serializable {
         this.listaBocadillos = listaBocadillos;
     }
 
-    public Calendario getFecha() {
+    public Calendario getCalendario() {
         return fecha;
     }
 

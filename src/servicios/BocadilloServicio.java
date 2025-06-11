@@ -166,7 +166,7 @@ public class BocadilloServicio {
         try {
             FileOutputStream fos = new FileOutputStream("src/persistencia/Bocadillo.dat", true);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(new Bocadillo(
+            listaBocadillos.add(new Bocadillo(
                     1,
                     "Bocadillo de Jamón",
                     "Clásico bocadillo español con jamón serrano.",
@@ -177,7 +177,7 @@ public class BocadilloServicio {
                     3.50,
                     false
             ));
-            oos.writeObject(new Bocadillo(
+            listaBocadillos.add(new Bocadillo(
                     2,
                     "Bocadillo Vegetal",
                     "Fresco y saludable, ideal para vegetarianos.",
@@ -188,7 +188,7 @@ public class BocadilloServicio {
                     4.20,
                     true
             ));
-            oos.writeObject(new Bocadillo(
+            listaBocadillos.add(new Bocadillo(
                     3,
                     "Bocadillo de Lomo con Queso",
                     "Lomo caliente con queso fundido.",
@@ -199,7 +199,7 @@ public class BocadilloServicio {
                     4.80,
                     true
             ));
-            oos.writeObject(new Bocadillo(
+            listaBocadillos.add(new Bocadillo(
                     4,
                     "Bocadillo de Tortilla",
                     "Tortilla de patata casera en pan crujiente.",
@@ -210,7 +210,7 @@ public class BocadilloServicio {
                     3.90,
                     false
             ));
-            oos.writeObject(new Bocadillo(
+            listaBocadillos.add(new Bocadillo(
                     5,
                     "Bocadillo de Atún",
                     "Ligero y sabroso, con atún y aceitunas.",
@@ -221,7 +221,7 @@ public class BocadilloServicio {
                     4.00,
                     false
             ));
-            oos.writeObject(new Bocadillo(
+            listaBocadillos.add(new Bocadillo(
                     1,
                     "Bocadillo de Nutella",
                     "Pan tierno con crema de cacao.",
@@ -233,7 +233,7 @@ public class BocadilloServicio {
                     true
             ));
 
-            oos.writeObject(new Bocadillo(
+            listaBocadillos.add(new Bocadillo(
                     2,
                     "Bocadillo Serrano",
                     "Jamón serrano con tomate y aceite.",
@@ -245,7 +245,7 @@ public class BocadilloServicio {
                     false
             ));
 
-            oos.writeObject(new Bocadillo(
+            listaBocadillos.add(new Bocadillo(
                     3,
                     "Bocadillo de Tortilla Española",
                     "Clásico de tortilla de patatas casera.",
@@ -257,7 +257,7 @@ public class BocadilloServicio {
                     true
             ));
 
-            oos.writeObject(new Bocadillo(
+            listaBocadillos.add(new Bocadillo(
                     4,
                     "Bocadillo de Bacon y Queso",
                     "Bacon crujiente con queso fundido.",
@@ -269,7 +269,7 @@ public class BocadilloServicio {
                     false
             ));
 
-            oos.writeObject(new Bocadillo(
+            listaBocadillos.add(new Bocadillo(
                     5,
                     "Bocadillo de Atún",
                     "Ligero y sabroso, con atún y aceitunas.",
@@ -281,7 +281,7 @@ public class BocadilloServicio {
                     true
             ));
 
-            oos.writeObject(new Bocadillo(
+            listaBocadillos.add(new Bocadillo(
                     6,
                     "Bocadillo de Magra con Tomate",
                     "Carne de magra con tomate frito.",
@@ -293,7 +293,7 @@ public class BocadilloServicio {
                     false
             ));
 
-            oos.writeObject(new Bocadillo(
+            listaBocadillos.add(new Bocadillo(
                     7,
                     "Bocadillo de York y Queso",
                     "Jamón de york con queso fundido.",
@@ -305,7 +305,7 @@ public class BocadilloServicio {
                     true
             ));
 
-            oos.writeObject(new Bocadillo(
+            listaBocadillos.add(new Bocadillo(
                     8,
                     "Bocadillo de Salchichón",
                     "Salchichón ibérico con un toque de aceite.",
@@ -317,7 +317,7 @@ public class BocadilloServicio {
                     true
             ));
 
-            oos.writeObject(new Bocadillo(
+            listaBocadillos.add(new Bocadillo(
                     9,
                     "Bocadillo de Tomate y Aceite",
                     "Sencillo y saludable con tomate natural.",
@@ -329,7 +329,7 @@ public class BocadilloServicio {
                     false
             ));
 
-            oos.writeObject(new Bocadillo(
+            listaBocadillos.add(new Bocadillo(
                     10,
                     "Bocadillo de Queso Azul",
                     "Queso azul con nueces y miel.",
@@ -340,6 +340,10 @@ public class BocadilloServicio {
                     4.50,
                     true
             ));
+
+            for (Bocadillo b : listaBocadillos) {
+                oos.writeObject(b);
+            }
 
 
             fos.close();
@@ -357,6 +361,7 @@ public class BocadilloServicio {
     }
 
     public static ArrayList<Bocadillo> obtenerBocadillos() {
+        listaBocadillos.clear();
         try {
             FileInputStream fis = new FileInputStream("src/persistencia/Bocadillo.dat");
             ObjectInputStream ois = new ObjectInputStream(fis);

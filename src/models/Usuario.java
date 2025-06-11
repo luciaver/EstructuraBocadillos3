@@ -78,6 +78,14 @@ public class Usuario  implements Serializable {
         this.fecha_nacimiento = fecha_nacimiento;
     }
 
+    public String getCurso() {
+        return curso;
+    }
+
+    public void setCurso(String curso) {
+        this.curso = curso;
+    }
+
     public List<String> getIncidencias() {
         return incidencias;
     }
@@ -88,7 +96,6 @@ public class Usuario  implements Serializable {
 
     //Mostrar informacion de usuario
     public void mostrarInfoUsuario() {
-        System.out.println("Usuario: " + usuario);
         System.out.println("Nombre: " + nombre);
         System.out.println("Apellidos: " + apellidos);
         System.out.println("Correo: " + correo);

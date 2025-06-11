@@ -1,5 +1,6 @@
 package servicios;
 
+import data.Gesdata;
 import models.*;
 
 import java.io.*;
@@ -10,12 +11,14 @@ import java.util.Random;
 
 public class PedidoServicio {
     // Lista que almacenará los pedidos generados
-    private static ArrayList<Pedido> listaPedidos = new ArrayList<>();
+    private static ArrayList<Pedido> listaPedidos = Gesdata.listaPedidos;
+
     // Lista de usuarios obtenida desde el servicio de usuarios
-    private static ArrayList<Usuario> listaUsuarios = UsuarioServicios.obtenerUsuario();
+    private static ArrayList<Usuario> listaUsuarios = Gesdata.listaUsuarios;
     private static ArrayList<Alumno> listaAlumnos = new ArrayList<>();
+
     // Lista de bocadillos obtenida desde el servicio de bocadillos
-    private static ArrayList<Bocadillo> listaBocadillos = BocadilloServicio.obtenerBocadillos();
+    private static ArrayList<Bocadillo> listaBocadillos = Gesdata.listaBocadillos;
 
 
 /**
@@ -35,13 +38,16 @@ public class PedidoServicio {
         Random rand = new Random();// Generador de números aleatorios
         // Genera 5 pedidos con datos aleatorios
         for (int i = 1; i <= 5; i++) {
-            listaPedidos.add(new Pedido(
+            Alumno alumno = listaAlumnos.get(rand.nextInt(0, listaAlumnos.size() - 1));
+            Pedido pedido = new Pedido(
                     i,
                     "pendiente",
-                    listaAlumnos.get(rand.nextInt(0, listaAlumnos.size() - 1)),
+                    alumno,
                     listaBocadillos.get(rand.nextInt(0, listaBocadillos.size() - 1)),
                     new Calendario(i + 4, LocalDate.now())
-            ));
+            );
+            listaPedidos.add(pedido);
+            alumno.getListaPedidos().add(pedido);
         }
 
         try {

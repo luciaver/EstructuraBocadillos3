@@ -1,10 +1,7 @@
 package autentication;
 
 import data.Gesdata;
-import models.Alumno;
 import models.Usuario;
-import servicios.UsuarioServicios;
-import ui.MenuAlumno;
 import utils.Validaciones;
 
 import java.util.ArrayList;
@@ -16,7 +13,7 @@ public class MenuAutenticar {
     //Menu principal
     public static Usuario menAuth() {
         Usuario usuarioActivo = null;
-        ArrayList<Usuario> listaUsuarios = UsuarioServicios.obtenerUsuario();
+        ArrayList<Usuario> listaUsuarios = Gesdata.listaUsuarios;
         Scanner entrada = new Scanner(System.in);
 
         do {
@@ -47,7 +44,7 @@ public class MenuAutenticar {
                         System.out.println("Opción no válida. Intente nuevamente.");
                         break;
                 }
-            }catch (InputMismatchException e){
+            } catch (InputMismatchException e) {
                 System.out.println("Debes introducir un valor entero");
                 entrada.nextLine();
             }
@@ -55,9 +52,7 @@ public class MenuAutenticar {
 
         return usuarioActivo;
     }
-
-
-    }
+}
 
 
 

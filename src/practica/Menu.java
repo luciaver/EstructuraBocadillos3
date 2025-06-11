@@ -1,9 +1,15 @@
-package Practica;
+package practica;
 
+import models.Alumno;
+import models.Incidencia;
 import models.Pedido;
 import models.Usuario;
+import servicios.IncidenciaServicios;
+import servicios.PedidoServicio;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Menu {
@@ -100,11 +106,12 @@ public class Menu {
                     break;
                 case 4:
                     System.out.println("Salir...");
+                    break;
                 default:
                     System.out.println("Opción no válida. Intente de nuevo.");
                     break;
             }
-        } while (opcion != 3);
+        } while (opcion != 4);
     }
 
 
@@ -124,7 +131,7 @@ public class Menu {
                     System.out.println("Iniciando el proceso de gestionar bocadillos de un usuario...");
                     break;
                 case 2:
-                    System.out.println("Opción seleccionada:Gestionar Uarios");
+                    System.out.println("Opción seleccionada:Gestionar Usuarios");
                     System.out.println("Iniciando el proceso de gestionar usuarios...");
                     break;
                 case 3:
@@ -153,7 +160,7 @@ public class Menu {
             System.out.println("3.Salir");
             System.out.println("Selecciona una opción");
             teclado.nextLine();
-            opcion3 = sc.nextInt();
+            opcion3 = teclado.nextInt();
 
             switch (opcion3) {
                 case 1:
@@ -171,8 +178,28 @@ public class Menu {
         } while (opcion3 != 3);
     }
 
+    public static void crearIncidencia(Usuario usuario) {
+        ArrayList<Pedido> listaPedidos = PedidoServicio.obtenerPedidos();
 
+        System.out.println("Creando incidencia...");
+        if (!listaPedidos.isEmpty()) {
+            IncidenciaServicios.crearIncidencia(usuario);
+        } else {
+            System.out.println("No hay pedidos disponibles para crear incidencia.");
+        }
+    }
+
+    public static void listarIncidencias() {
+        ArrayList<Incidencia> listaIncidencias = IncidenciaServicios.obtenerIncidencias();
+
+        System.out.println("Listado de incidencias:");
+        for (Incidencia i : listaIncidencias) {
+            System.out.println(i.toString());
+        }
+    }
 }
+
+
 
 
 

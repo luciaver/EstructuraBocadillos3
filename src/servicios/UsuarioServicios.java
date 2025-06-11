@@ -5,16 +5,17 @@ import models.*;
 import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class UsuarioServicios {
     // Lista que almacena los usuarios registrados en memoria
-    private static List<Usuario> listaUsuarios = new ArrayList<>();
+    private static ArrayList<Usuario> listaUsuarios = new ArrayList<>();
 
     private static Scanner scanner = new Scanner(System.in);
+
     /**
      * Busca un usuario por su nombre de usuario.
+     *
      * @param usuario nombre de usuario a buscar
      * @return el objeto Usuario si se encuentra, o null si no
      */
@@ -28,25 +29,42 @@ public class UsuarioServicios {
 
     }
 
+    public static void listarUsuarios() {
+        for (Usuario u : listaUsuarios) {
+            u.mostrarInfoUsuario();
+        }
+    }
+
 
     public static void insertarUsuario(Usuario nuevo) {
         System.out.print("Nombre: ");
         String nombre = scanner.nextLine();
+        nuevo.setNombre(nombre);
+
         System.out.println("Apellido:");
-        String apellido =scanner.nextLine();
+        String apellido = scanner.nextLine();
+        nuevo.setApellidos(apellido);
+
         System.out.print("Correo: ");
         String correo = scanner.nextLine();
+        nuevo.setCorreo(correo);
+
         System.out.print("Contraseña: ");
         String contrasena = scanner.nextLine();
+        nuevo.setPassword(contrasena);
+
         System.out.print("Curso: ");
         String curso = scanner.nextLine();
+        nuevo.setCurso(curso);
+
         System.out.println("Usuario registrado con éxito.");
         listaUsuarios.add(nuevo);
-
+        volcarListas();
     }
 
     /**
      * Modifica los datos de un usuario existente según el objeto `modificado`.
+     *
      * @param modificado Usuario con los datos actualizados.
      */
 
@@ -64,8 +82,10 @@ public class UsuarioServicios {
         }
 
     }
+
     /**
      * Elimina un usuario por su nombre de usuario.
+     *
      * @param eliminar nombre de usuario a eliminar
      */
     public static void eliminarUsuario(String eliminar) {
@@ -92,16 +112,16 @@ public class UsuarioServicios {
         try {
             FileOutputStream fos = new FileOutputStream("src/persistencia/Usuarios.dat", true);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(new Alumno("lolo", "lolo", "lol", "lolo@gmail.com", "123456", LocalDate.now(), null, "1ºESO", "A"));
-            oos.writeObject(new Alumno("lolo", "lolo", "lol", "lolo@gmail.com", "123456", LocalDate.now(), null, "1ºESO", "A"));
-            oos.writeObject(new Alumno("maria", "gomez", "mari", "maria@gmail.com", "abcdef", LocalDate.now(), null, "1ºESO", "B"));
-            oos.writeObject(new Alumno("juan", "perez", "juampi", "juanp@gmail.com", "654321", LocalDate.now(), null, "2ºESO", "A"));
-            oos.writeObject(new Alumno("ana", "lopez", "anita", "ana.lopez@gmail.com", "qwerty", LocalDate.now(), null, "3ºESO", "C"));
-            oos.writeObject(new Alumno("carlos", "ruiz", "charly", "carlosr@gmail.com", "zxcvb", LocalDate.now(), null, "4ºESO", "B"));
-            oos.writeObject(new Alumno("lucia", "navarro", "luci", "lucia.n@gmail.com", "112233", LocalDate.now(), null, "1ºESO", "A"));
+            listaUsuarios.add(new Alumno("lolo", "lolo", "lol", "lolo@gmail.com", "123456", LocalDate.now(), null, "1ºESO", "A"));
+            listaUsuarios.add(new Alumno("lolo", "lolo", "lol", "lolo@gmail.com", "123456", LocalDate.now(), null, "1ºESO", "A"));
+            listaUsuarios.add(new Alumno("maria", "gomez", "mari", "maria@gmail.com", "abcdef", LocalDate.now(), null, "1ºESO", "B"));
+            listaUsuarios.add(new Alumno("juan", "perez", "juampi", "juanp@gmail.com", "654321", LocalDate.now(), null, "2ºESO", "A"));
+            listaUsuarios.add(new Alumno("ana", "lopez", "anita", "ana.lopez@gmail.com", "qwerty", LocalDate.now(), null, "3ºESO", "C"));
+            listaUsuarios.add(new Alumno("carlos", "ruiz", "charly", "carlosr@gmail.com", "zxcvb", LocalDate.now(), null, "4ºESO", "B"));
+            listaUsuarios.add(new Alumno("lucia", "navarro", "luci", "lucia.n@gmail.com", "112233", LocalDate.now(), null, "1ºESO", "A"));
 
-            oos.writeObject(new Cocina("cocina1", "Pepa", "pep", "pepa@gmail.com", "123456", LocalDate.now()));
-            oos.writeObject(new Administrador("admin", "Admin", "vera", "admin@gmail.com", "123456", LocalDate.now()));
+            listaUsuarios.add(new Cocina("cocina1", "Pepa", "pep", "pepa@gmail.com", "123456", LocalDate.now()));
+            listaUsuarios.add(new Administrador("admin", "Admin", "vera", "admin@gmail.com", "123456", LocalDate.now()));
             // También se vuelcan los usuarios actuales en listaUsuarios
             for (Usuario u : listaUsuarios) {
                 oos.writeObject(u);
@@ -121,8 +141,7 @@ public class UsuarioServicios {
     }
 
     public static ArrayList<Usuario> obtenerUsuario() {
-
-
+        listaUsuarios.clear();
 
         try {
             FileInputStream fis = new FileInputStream("src/persistencia/Usuarios.dat");
@@ -139,7 +158,7 @@ public class UsuarioServicios {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-        return (ArrayList<Usuario>) listaUsuarios;
+        return listaUsuarios;
     }
 
 }

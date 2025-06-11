@@ -32,8 +32,9 @@ public class MenuAdministrador {
                         System.out.println("1. Insertar Usuario");
                         System.out.println("2. Modificar Usuario");
                         System.out.println("3. Buscar Usuario");
-                        System.out.println("4. Eliminar Usuario");
-                        System.out.println("5. Volver al Menú Principal");
+                        System.out.println("4. Listar Usuario");
+                        System.out.println("5. Eliminar Usuario");
+                        System.out.println("0. Volver al Menú Principal");
                         System.out.print("Selecciona una opción: ");
                         opcionUsuario = scanner.nextLine();
 
@@ -76,12 +77,15 @@ public class MenuAdministrador {
                                     System.out.println("Usuario no encontrado.");
                                 }
                                 break;
-                            case "4": // Eliminar
+                            case "4":
+                                UsuarioServicios.listarUsuarios();
+                                break;
+                            case "5": // Eliminar
                                 System.out.print("Introduce el nombre de usuario a eliminar: ");
                                 String usuarioEliminar = scanner.nextLine();
                                 UsuarioServicios.eliminarUsuario(usuarioEliminar);
                                 break;
-                            case "5":
+                            case "0":
                                 System.out.println("Volviendo al menú principal...");
                                 break;
                             default:
@@ -103,7 +107,5 @@ public class MenuAdministrador {
                     System.out.println("Opción no válida. Inténtalo de nuevo.");
             }
         } while (!seleccionAdmin.equals("4"));
-
-        scanner.close();
     }
 }

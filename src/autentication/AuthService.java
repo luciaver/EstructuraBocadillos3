@@ -7,15 +7,8 @@ import utils.Validaciones;
 import java.time.LocalDate;
 import java.util.Scanner;
 
-/**
- *
- */
 public class AuthService {
 
-    /**
-     *
-     * @return
-     */
     public static Usuario login() {
         Scanner entrada= new Scanner(System.in);
         String usuario,password;
@@ -39,12 +32,10 @@ public class AuthService {
                     return item;
 
                 }
-
-                System.out.println("El usuario o la contraseña son incorrectos");
-
             }
 
         }
+        System.out.println("El usuario o la contraseña son incorrectos");
         return null;
     }
     public static Usuario registro(){
