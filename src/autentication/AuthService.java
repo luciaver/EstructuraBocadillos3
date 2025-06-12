@@ -27,7 +27,7 @@ public class AuthService {
         for (Usuario item : Gesdata.listaUsuarios) {
             if (item != null) {
 
-                if (item.getUsuario().equals(usuario) && item.getPassword().equals(password)) {
+                if (item.getNombre().equals(usuario) && item.getPassword().equals(password)) {
                     System.out.println("USUARIO ENCONTRADO");
                     return item;
 

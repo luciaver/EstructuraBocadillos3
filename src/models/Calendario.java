@@ -18,6 +18,10 @@ public class Calendario implements Serializable {
         this.id = id;
         this.fecha = fecha;
     }
+    public Calendario(LocalDate fecha) {
+        this.id = 0;
+        this.fecha = fecha;
+    }
 
     public int getId() {
         return id;

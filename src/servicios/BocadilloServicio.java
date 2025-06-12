@@ -58,10 +58,10 @@ public class BocadilloServicio {
         System.out.print("Nueva ciudad popular: ");
         b.setCiudadPopular(scanner.nextLine());
 
-        System.out.print("Nuevos ingredientes (coma separados): ");
+        System.out.print("Nuevos ingredientes : ");
         b.setIngredientes(scanner.nextLine().split(",\\s*"));
 
-        System.out.print("Nuevos alérgenos (coma separados): ");
+        System.out.print("Nuevos alérgenos : ");
         b.setAlergenos(scanner.nextLine().split(",\\s*"));
 
         System.out.print("Nuevo precio: ");

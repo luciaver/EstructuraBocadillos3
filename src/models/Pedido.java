@@ -1,24 +1,23 @@
 package models;
-
+import models.Calendario;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Scanner;
 
-//Variables
 public class Pedido implements Serializable {
     static Scanner teclado = new Scanner(System.in);
     private int id_pedido;
     private Usuario usuario;
     private Bocadillo bocadillo;
-    private Calendario fecha;
+    private LocalDate fecha;
     private String estado;
-    private Usuario[] listaUsuarios;
-    private Bocadillo[] listaBocadillos;
+
 
     public Pedido() {
     }
 
     //Constructores
-    public Pedido(int id_pedido, String estado, Usuario usuario, Bocadillo bocadillo, Calendario fecha) {
+    public Pedido(int id_pedido, String estado, Usuario usuario, Bocadillo bocadillo, LocalDate fecha) {
         this.id_pedido = id_pedido;
         this.estado = estado;
         this.usuario = usuario;
@@ -26,6 +25,7 @@ public class Pedido implements Serializable {
         this.fecha = fecha;
 
     }
+
 
     public static void seleccionarBocadillo() {
 
@@ -70,27 +70,12 @@ public class Pedido implements Serializable {
         this.bocadillo = bocadillo;
     }
 
-    public Usuario[] getListaUsuarios() {
-        return listaUsuarios;
-    }
 
-    public void setListaUsuarios(Usuario[] listaUsuarios) {
-        this.listaUsuarios = listaUsuarios;
-    }
-
-    public Bocadillo[] getListaBocadillos() {
-        return listaBocadillos;
-    }
-
-    public void setListaBocadillos(Bocadillo[] listaBocadillos) {
-        this.listaBocadillos = listaBocadillos;
-    }
-
-    public Calendario getCalendario() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(Calendario fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 
@@ -102,7 +87,15 @@ public class Pedido implements Serializable {
         this.estado = estado;
     }
 
-
+    @Override
+    public String toString() {
+        return "Pedido{" +
+                " usuario=" + usuario +
+                ", bocadillo=" + bocadillo +
+                ", fecha=" + fecha +
+                ", estado='" + estado + '\'' +
+                '}';
+    }
 }
 
 

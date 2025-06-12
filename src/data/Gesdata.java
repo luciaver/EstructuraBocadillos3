@@ -15,16 +15,13 @@ public class Gesdata {
 
 
     public static void iniciarFicheros() {
-        UsuarioServicios.volcarListas();
+
         listaUsuarios = UsuarioServicios.obtenerUsuario();
 
-        BocadilloServicio.volcarBocadillos();
         listaBocadillos = BocadilloServicio.obtenerBocadillos();
 
-        PedidoServicio.volcarPedidos();
         listaPedidos = PedidoServicio.obtenerPedidos();
 
-        IncidenciaServicios.volcarIncidencias();
         listaIncidencias = IncidenciaServicios.obtenerIncidencias();
     }
 

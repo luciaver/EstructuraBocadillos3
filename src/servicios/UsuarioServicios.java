@@ -58,6 +58,9 @@ public class UsuarioServicios {
         nuevo.setCurso(curso);
 
         System.out.println("Usuario registrado con éxito.");
+
+        nuevo = new Alumno(nombre, nombre, apellido, correo, contrasena, LocalDate.of(2004, 9, 25), null, curso, "A");
+
         listaUsuarios.add(nuevo);
         volcarListas();
     }
@@ -104,15 +107,12 @@ public class UsuarioServicios {
         }
     }
 
-    /**
-     * Vuelca usuarios predeterminados y los de la lista en un archivo.
-     * Incluye un alumno, un cocina y un administrador por defecto.
-     */
+
     public static void volcarListas() {
         try {
-            FileOutputStream fos = new FileOutputStream("src/persistencia/Usuarios.dat", true);
+            FileOutputStream fos = new FileOutputStream("src/persistencia/Usuarios.dat");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
-            listaUsuarios.add(new Alumno("lolo", "lolo", "lol", "lolo@gmail.com", "123456", LocalDate.now(), null, "1ºESO", "A"));
+            /*listaUsuarios.add(new Alumno("lolo", "lolo", "lol", "lolo@gmail.com", "123456", LocalDate.now(), null, "1ºESO", "A"));
             listaUsuarios.add(new Alumno("lolo", "lolo", "lol", "lolo@gmail.com", "123456", LocalDate.now(), null, "1ºESO", "A"));
             listaUsuarios.add(new Alumno("maria", "gomez", "mari", "maria@gmail.com", "abcdef", LocalDate.now(), null, "1ºESO", "B"));
             listaUsuarios.add(new Alumno("juan", "perez", "juampi", "juanp@gmail.com", "654321", LocalDate.now(), null, "2ºESO", "A"));
@@ -121,11 +121,12 @@ public class UsuarioServicios {
             listaUsuarios.add(new Alumno("lucia", "navarro", "luci", "lucia.n@gmail.com", "112233", LocalDate.now(), null, "1ºESO", "A"));
 
             listaUsuarios.add(new Cocina("cocina1", "Pepa", "pep", "pepa@gmail.com", "123456", LocalDate.now()));
-            listaUsuarios.add(new Administrador("admin", "Admin", "vera", "admin@gmail.com", "123456", LocalDate.now()));
+            listaUsuarios.add(new Administrador("admin", "Admin", "vera", "admin@gmail.com", "123456", LocalDate.now()));*/
             // También se vuelcan los usuarios actuales en listaUsuarios
             for (Usuario u : listaUsuarios) {
                 oos.writeObject(u);
             }
+
             fos.close();
             oos.flush();
             oos.close();

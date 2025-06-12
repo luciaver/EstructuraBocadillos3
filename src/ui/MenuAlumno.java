@@ -1,10 +1,10 @@
 package ui;
-import practica.Menu;
+
 import models.Alumno;
 import models.Bocadillo;
 import models.Pedido;
+import models.Usuario;
 import servicios.BocadilloServicio;
-import servicios.IncidenciaServicios;
 import servicios.PedidoServicio;
 
 import java.time.LocalDate;
@@ -12,9 +12,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MenuAlumno {
+
     public static void menu(Alumno alumno){
         ArrayList<Bocadillo> listaBocadillos = BocadilloServicio.obtenerBocadillos();
-        ArrayList<Pedido> listaPedidos = PedidoServicio.obtenerPedidos();
         ArrayList<Bocadillo> listaFrios = new ArrayList<>();
         ArrayList<Bocadillo> listaCaliente = new ArrayList<>();
         int cont = 1;
@@ -35,37 +35,65 @@ public class MenuAlumno {
             System.out.println("====================================");
             System.out.println("=          MENÚ ALUMNO             =");
             System.out.println("====================================");
-            System.out.println("1. Solicitar bocadillo");
+            System.out.println("1. Pedir bocadillo");
             System.out.println("2. Horario Bocadillo");
             System.out.println("3. Historial de pedidos");
-            System.out.println("4. Reportar incidencia");
-            System.out.println("0. Salir");
+            System.out.println("4. Salir");
             System.out.print("Selecciona una opción: ");
             seleccionAlumno = scanner.nextLine();
 
             switch (seleccionAlumno) {
 
-                //Solicitar bocadillo
 
                 case "1":
-                    System.out.println("Elige tu bocadillo");
-                    System.out.println("Frios: ");
+                    ArrayList<Bocadillo> disponibles = new ArrayList<>();
+                    System.out.print("¿Quieres un bocadillo frío o caliente? (f/c): ");
+                    String tipo = scanner.nextLine().toLowerCase();
 
-                    for (Bocadillo b : listaFrios) {
+                    ArrayList<Bocadillo> listaSeleccionada = tipo.equals("f") ? listaFrios : tipo.equals("c") ? listaCaliente : null;
+
+                    if (listaSeleccionada == null) {
+                        System.out.println("Tipo no reconocido.");
+                        break;
+                    }
+
+                    System.out.println((tipo.equals("f") ? "Fríos:" : "Calientes:"));
+                    int i = 0;
+                    for (Bocadillo b : listaSeleccionada) {
                         if (LocalDate.now().isEqual(b.getCalendario().getFecha())) {
-                            System.out.println(cont + "." + b.getNombre() + " - " + b.getPrecio() + "€");
-                            cont++;
+                            System.out.println(i + ". " + b.getNombre() + " - " + b.getPrecio() + "€");
+                            disponibles.add(b);
+                            i++;
                         }
                     }
 
-                    System.out.println("Calientes: ");
-
-                    for (Bocadillo b : listaCaliente) {
-                        if (LocalDate.now().isEqual(b.getCalendario().getFecha())) {
-                            System.out.println(cont + "." + b.getNombre() + " - " + b.getPrecio() + "€");
-                            cont++;
-                        }
+                    if (disponibles.isEmpty()) {
+                        System.out.println("No hay bocadillos disponibles hoy.");
+                        break;
                     }
+
+                    System.out.print("Selecciona el número del bocadillo: ");
+                    try {
+                        int op = Integer.parseInt(scanner.nextLine());
+                        if (op < 0 || op >= disponibles.size()) {
+                            System.out.println("Opción inválida.");
+                            break;
+                        }
+
+                        Bocadillo bocata = disponibles.get(op);
+                        Pedido nuevoPedido = new Pedido(0, "Pendiente", alumno, bocata, LocalDate.now());
+                        PedidoServicio.obtenerPedidos();
+                        System.out.println("Pedido realizado correctamente.");
+                    } catch (NumberFormatException e) {
+                        System.out.println("Entrada no válida.");
+                    }
+
+                    //Escoger un bocadillo de la lista, y creas el pedido ap artir de ese bocadillo
+                    //Pedir si es frío o caliente
+
+                    //Si escojo el 0 de la lista de fríos:::::   Bocadillo bocata=listafrios.get(op);
+
+                    //Pedido nuevoP=new Pedido(alumno, bocata, LocalDate.now(),"Pendiente");
 
                     break;
 
@@ -76,21 +104,17 @@ public class MenuAlumno {
                     break;
 
                 case "3":
-                    listarPedidos(alumno);
+                    int contador = 1;
+                    for (Pedido p : alumno.getListaPedidos()) {
+                        System.out.println(contador + p.toString());
+                        contador++;
+                    }
+
 
                     break;
 
                 case "4":
-                    System.out.println("Creando incidencia..."); //todo -> mostrar pedidos del alumno para escoger aa cual hacer la incidencia
-                    if (!listaPedidos.isEmpty()) {
-                        IncidenciaServicios.crearIncidencia(alumno);
-                    } else {
-                        System.out.println("No hay pedidos disponibles para crear incidencia.");
-                    }
-                    break;
 
-
-                case "0":
                     System.out.println("Saliendo del menú de alumno...");
                     break;
 
@@ -100,17 +124,6 @@ public class MenuAlumno {
         } while (!seleccionAlumno.equals("4"));
     }
 
-    public static void listarPedidos(Alumno alumno) {
-        //todo -> menu para pedidos
-        for (Pedido p : alumno.getListaPedidos()){
-            System.out.println(p.getBocadillo().getNombre());
-            System.out.println(p.getCalendario().getFecha());
-            System.out.println(p.getEstado());
-        }
-    }
-
-
 
 }
-
 

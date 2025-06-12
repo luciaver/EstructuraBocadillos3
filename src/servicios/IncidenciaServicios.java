@@ -32,11 +32,11 @@ public class IncidenciaServicios {
     public static void volcarIncidencias() {
         ArrayList<Usuario> listaUsuarios = Gesdata.listaUsuarios;
         try {
-            FileOutputStream fos = new FileOutputStream("src/persistencia/Incidencia.dat", true);
+            FileOutputStream fos = new FileOutputStream("src/persistencia/Incidencia.dat");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
-            listaIncidencias.add(new Incidencia(0, "incidencia 1", listaUsuarios.get(0)));
+            /*listaIncidencias.add(new Incidencia(0, "incidencia 1", listaUsuarios.get(0)));
             listaIncidencias.add(new Incidencia(1, "incidencia 2", listaUsuarios.get(1)));
-            listaIncidencias.add(new Incidencia(2, "incidencia 3", listaUsuarios.get(2)));
+            listaIncidencias.add(new Incidencia(2, "incidencia 3", listaUsuarios.get(2)));*/
             // También se vuelcan los usuarios actuales en listaUsuarios
             for (Incidencia i : listaIncidencias) {
                 oos.writeObject(i);

@@ -29,17 +29,31 @@ public class MenuCocina {
 
             switch (seleccionCocina) {
                 case "1":
-                    System.out.println("Listando bocadillos...");
-                    
-                    //for(Pedido p : listaPedidos) {'1. ' + p.getNombre}
+                    if (listaPedidos.isEmpty()) {
+                        System.out.println("No hay pedidos registrados.");
+                    } else {
+                        System.out.println("Bocadillos pedidos actualmente:");
+                        int i = 1;
+                        for (Pedido p : listaPedidos) {
+                            System.out.println(i + ". " + p.getBocadillo().getNombre());
+                            i++;
+                        }
+                    }
                     break;
                 case "2":
-                    System.out.println("Consultando pedidos...");
-                    //todo -> hacer menú para listar pedidos
-                    //for(Pedido p : listaPedidos) {'1. ' + p.getNombre} (lista toda la informacion relevante de los pedidos)
+                    if (listaPedidos.isEmpty()) {
+                        System.out.println("No hay pedidos para consultar.");
+                    } else {
+                        System.out.println("Lista de pedidos detallada:");
+                        for (Pedido p : listaPedidos) {
+                            System.out.println("- Pedido #" + p.getId_pedido() + " Bocadillo: " + p.getBocadillo().getNombre() +
+                                    " Alumno: " + p.getUsuario().getNombre() + "  Fecha: " + p.getFecha() +
+                                    "  Estado: " + p.getEstado());
+                        }
+                    }
                     break;
                 case "3":
-                    System.out.println("Creando incidencia..."); //todo -> mostrar pedidos del alumno para escoger aa cual hacer la incidencia
+                    System.out.println("Creando incidencia...");
                     if (!listaPedidos.isEmpty()) {
                         IncidenciaServicios.crearIncidencia(usuario);
                     } else {

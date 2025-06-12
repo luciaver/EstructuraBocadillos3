@@ -5,6 +5,7 @@ import models.*;
 
 import java.io.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -21,13 +22,6 @@ public class PedidoServicio {
     private static ArrayList<Bocadillo> listaBocadillos = Gesdata.listaBocadillos;
 
 
-/**
- * Método para volcar (guardar) pedidos en un archivo binario.
- * Se generan aleatoriamente 5 pedidos con estado "pendiente",
- * */
-
-
-
     public static void volcarPedidos() {
         for (Usuario u : listaUsuarios) {
             if (u instanceof Alumno) {
@@ -35,17 +29,13 @@ public class PedidoServicio {
             }
         }
 
-        Random rand = new Random();// Generador de números aleatorios
+        Random rand = new Random();
         // Genera 5 pedidos con datos aleatorios
         for (int i = 1; i <= 5; i++) {
             Alumno alumno = listaAlumnos.get(rand.nextInt(0, listaAlumnos.size() - 1));
-            Pedido pedido = new Pedido(
-                    i,
-                    "pendiente",
-                    alumno,
-                    listaBocadillos.get(rand.nextInt(0, listaBocadillos.size() - 1)),
-                    new Calendario(i + 4, LocalDate.now())
-            );
+            Bocadillo bocadillo = null;
+            Pedido pedido = new Pedido(5, "Pendiente", alumno, bocadillo, LocalDate.now());
+
             listaPedidos.add(pedido);
             alumno.getListaPedidos().add(pedido);
         }
@@ -54,12 +44,10 @@ public class PedidoServicio {
             FileOutputStream fos = new FileOutputStream("src/persistencia/Pedido.dat");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
 
-            // Escribe cada pedido de la lista en el archivo
             for (Pedido p : listaPedidos) {
                 oos.writeObject(p);
             }
 
-            // Cierra los flujos de salida
             fos.close();
             oos.flush();
             oos.close();
@@ -84,7 +72,7 @@ public class PedidoServicio {
 
 
     public static ArrayList<Pedido> obtenerPedidos() {
-        listaPedidos.clear();
+        listaPedidos = new ArrayList<>();
         try {
             FileInputStream fis = new FileInputStream("src/persistencia/Pedido.dat");
             ObjectInputStream ois = new ObjectInputStream(fis);
